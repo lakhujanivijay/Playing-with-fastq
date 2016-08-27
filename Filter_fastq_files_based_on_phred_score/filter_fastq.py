@@ -10,16 +10,16 @@ from Bio import SeqIO
 input_file=open("test.fastq")
 
 quality_score=input("Enter your quality threshold score: ")
+read_percentage=input("Enter your threshold for no of reads: ")
 
-line_number,rec,count=0,0,0
+count=0
 
 for record in SeqIO.parse(input_file, "fastq"):
-    rec+=1
-    score=record.letter_annotations["phred_quality"]
-    mean_score=sum(score)/len(score)
-    if mean_score<quality_score:
-        count+=1    
-    score=0
-    mean_score=0
-
+    scores=record.letter_annotations["phred_quality"]
+    good=0
+    for entry in scores:
+        if entry>=quality_score:
+            good+=1
+    if float(good) / len(scores) >= read_percentage:
+        count += 1
 print count
