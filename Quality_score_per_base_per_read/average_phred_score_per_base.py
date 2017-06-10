@@ -2,7 +2,7 @@ from Bio import SeqIO
 import getopt, sys, re
 
 def usage():
-    print "Usage: base_quality.py -i <input_fastq> -b <position of base as integer> "
+    print "Usage: average_phred_score_per_base.py -i <input_fastq> -b <position of base as integer> "
     
 try:
     options, remainder=getopt.getopt(sys.argv[1:], 'i:b:h')
